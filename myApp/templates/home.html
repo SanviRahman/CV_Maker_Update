@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #007BFF;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #007BFF;
+            margin-bottom: 15px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .cv-list {
+            margin-bottom: 20px;
+        }
+
+        .cv-item {
+            margin: 10px 0;
+            padding: 10px;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .cv-item a {
+            font-weight: bold;
+        }
+
+        button {
+            display: inline-block;
+            padding: 10px 15px;
+            font-size: 14px;
+            color: #fff;
+            background: #28a745;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        button:hover {
+            background: #218838;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 15px;
+            color: #fff;
+            background: #17a2b8;
+            text-align: center;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: #138496;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Home Page</h1>
+        <h2>All CV List:</h2>
+        <div class="cv-list">
+            {% for task in tasks %}
+            <div class="cv-item">
+                {{ task.pk }}.{{ task.customuser.name }}
+                <button type="submit" class="btn">
+                    <a href="{% url 'cv_details' task.pk %}">Details</a>
+                </button>
+                
+                <!-- Update Button -->
+                <button type="submit" class="btn">
+                    <a href="{% url 'cv_update' task.pk %}">Update CV</a>
+                </button>
+                
+                <!-- Delete Button -->
+                <button type="submit" class="btn">
+                    <a href="{% url 'cv_delete' task.pk %}">Delete CV</a>
+                </button>
+                
+                <!-- Download Button -->
+                <button type="submit" class="btn">
+                    <a href="{% url 'approved' task.pk %}">Download CV</a>
+                </button>
+            </div>
+            {% endfor %}
+        </div>
+        <a href="{% url 'registers' %}" type="submit" class="btn">
+            To make your CV, first you need to register
+        </a>
+        <a href="{% url 'logins' %}" type="submit" class="btn">
+            Already have an accont?Please Login!
+        </a>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color:#007BFF;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color:#007BFF;
+            margin-bottom: 15px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .cv-list {
+            margin-bottom: 20px;
+        }
+
+        .cv-item {
+            margin: 10px 0;
+            padding: 10px;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .cv-item a {
+            font-weight: bold;
+        }
+
+        button {
+            display: inline-block;
+            padding: 10px 15px;
+            font-size: 14px;
+            color: #fff;
+            background: #28a745;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        button:hover {
+            background: #218838;
+        }
+
+        .btn {
+            display:inline;
+            margin-top: 15px;
+            color: #fff;
+            background: #17a2b8;
+            text-align: center;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: #138496;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Home Page</h1>
+        <h2>All CV List:</h2>
+        <div class="cv-list">
+            {% for task in tasks %}
+            <div class="cv-item">
+                {{ task.pk }}. <a href="{% url 'cv_details' task.pk %}">{{ task.name }}</a> {{ task.mobile }} <button type="submit" class="btn">
+                <a href="/update_cv/pk/">Update CV</a> </button> <button type="submit" class="btn">
+                <a href="/delete_cv/pk/">Delete CV</a> </button>
+                <button class="btn"> <a href="/approved/">Download CV</a> </button>
+            </div>
+            {% endfor %}
+        </div>
+        <button type="submit" class="btn">
+            <a href="">All Task</a>
+        </button>
+    
+        <a href="registers/" type="submit" class="btn">To make your CV, first you need to register</a>
+    </div>
+</body>
+</html> -->

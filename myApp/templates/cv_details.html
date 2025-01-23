@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+            margin-top: 20px;
+        }
+
+        /* Container Styles */
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Paragraph and Label Styling */
+        .container p  {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+
+        .container strong {
+            font-weight: bold;
+            color: #555;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Here CV Detalils</h1>
+    
+    <div class="container">
+        <p><strong></strong> <img src="{{ tasks.image.url }}" alt="Profile Image" style="width: 100px; height: 100px;"></p>
+        <p><strong>Id:</strong>{{ tasks.id }}</p>
+        <p><strong>Name:</strong>{{ tasks.name }}</p>
+        <p><strong>Email:</strong>{{ tasks.email }}</p>
+        <p><strong>Mobile:</strong>{{ tasks.mobile }}</p>
+        <p> <strong>Objective:</strong>{{ tasks.objective }}</p>
+        <p><strong>Skills</strong> {{ tasks.skills }}</p>
+        <p><strong>Tools:</strong> {{ tasks.tools }} </p>
+        <p><strong>Projects:</strong> {{ tasks.projects }} </p>
+        <p><strong>Education:</strong> {{ tasks.education }} </p>
+    </div>
+</body>
+
+</html>

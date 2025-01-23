@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Approved Page</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        img {
+            max-width: 100px;
+            height: auto;
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Your CV is Ready to Download</h1>
+        {% if form_instance.image %}
+        <img src="{{ form_instance.image.url }}" alt="Profile Image">
+        {% endif %}
+        <p><strong>Name:</strong> {{ form_instance.name }}</p>
+        <p><strong>Email:</strong> {{ form_instance.email }}</p>
+        <p><strong>Mobile:</strong> {{ form_instance.mobile }}</p>
+        <p><strong>Objective:</strong> {{ form_instance.objective }}</p>
+        <p><strong>Skills:</strong> {{ form_instance.skills }}</p>
+        <p><strong>Tools:</strong> {{ form_instance.tools }}</p>
+        <p><strong>Projects:</strong> {{ form_instance.projects }}</p>
+        <p><strong>Education:</strong> {{ form_instance.education }}</p>
+
+        <button onclick="downloadPDF()">Download PDF</button>
+        <button><a href="{% url 'logout' %}" style="text-decoration: none; color: white;">Logout</a></button>
+    </div>
+
+    <script>
+        function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF();
+
+            pdf.text('Curriculum Vitae', 105, 10, null, null, 'center');
+            pdf.setFontSize(12);
+
+            pdf.addImage('{{ form_instance.image.url|safe }}', 'JPEG', 20, 20, 18, 15);
+
+            pdf.text('Name: {{ form_instance.name }}', 20, 40);
+            pdf.text('Email: {{ form_instance.email }}', 20, 45);
+            pdf.text('Mobile: {{ form_instance.mobile }}', 20, 50);
+            pdf.text('Objective:', 20, 60);
+            pdf.text('{{ form_instance.objective|safe }}', 20, 70);
+            pdf.text('Skills:', 20, 90);
+            pdf.text('{{ form_instance.skills|safe }}', 20, 110);
+            pdf.text('Tools:', 20, 120);
+            pdf.text('{{ form_instance.tools|safe }}', 20, 130);
+            pdf.text('Projects:', 20, 140);
+            pdf.text('{{ form_instance.projects|safe }}', 20, 160);
+            pdf.text('Education:', 20, 180);
+            pdf.text('{{ form_instance.education|safe }}', 20, 190);
+
+            pdf.save('CV.pdf');
+        }
+    </script>
+</body>
+
+</html>

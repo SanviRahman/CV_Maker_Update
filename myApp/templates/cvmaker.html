@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input and Output Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+            max-width: 1200px;
+            width: 100%;
+            padding: 20px;
+        }
+
+        section {
+            flex: 1;
+            background-color: #ffffff;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            min-width: 300px;
+        }
+
+        h1 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+
+        div {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        img {
+            max-width: 200px;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            section {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Input Form -->
+        <section>
+            <h1>Input Form</h1>
+            <form oninput="updateOutput()" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div>
+                    <label for="image">Profile Image:</label>
+                    <input type="file" id="image" name="image" accept="image/*">
+                </div>
+                <div>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" value="{{ form.name.value }}" required>
+                </div>
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" value="{{ form.email.value }}" required>
+                </div>
+                <div>
+                    <label for="mobile">Mobile Number:</label>
+                    <input type="text" id="mobile" name="mobile" required>
+                </div>
+                <div>
+                    <label for="objective">Objective:</label>
+                    <textarea id="objective" name="objective" rows="3" required></textarea>
+                </div>
+                <div>
+                    <label for="skills">Skills:</label>
+                    <textarea id="skills" name="skills" rows="3"></textarea>
+                </div>
+                <div>
+                    <label for="tools">Tools:</label>
+                    <textarea id="tools" name="tools" rows="3" required></textarea>
+                </div>
+                <div>
+                    <label for="projects">Projects:</label>
+                    <textarea id="projects" name="projects" rows="5" required></textarea>
+                </div>
+                <div>
+                    <label for="education">Education:</label>
+                    <textarea id="education" name="education" rows="5" required></textarea>
+                </div>
+                <button type="submit">Save</button>
+            </form>
+        </section>
+
+        <!-- Output Section -->
+        <section>
+            <h1>Output</h1>
+            <div>
+                <label>Profile Image:</label>
+                <img id="outputImage" src="#" alt="Profile Image">
+            </div>
+            <div>
+                <label>Name:</label>
+                <p id="outputName"></p>
+            </div>
+            <div>
+                <label>Email:</label>
+                <p id="outputEmail"></p>
+            </div>
+            <div>
+                <label>Mobile Number:</label>
+                <p id="outputMobile"></p>
+            </div>
+            <div>
+                <label>Objective:</label>
+                <p id="outputObjective"></p>
+            </div>
+            <div>
+                <label>Skills:</label>
+                <p id="outputSkills"></p>
+            </div>
+            <div>
+                <label>Tools:</label>
+                <p id="outputTools"></p>
+            </div>
+            <div>
+                <label>Projects:</label>
+                <p id="outputProjects"></p>
+            </div>
+            <div>
+                <label>Education:</label>
+                <p id="outputEducation"></p>
+            </div>
+        </section>
+    </div>
+    <script>
+        function updateOutput() {
+            document.getElementById('outputName').innerText = document.getElementById('name').value;
+            document.getElementById('outputEmail').innerText = document.getElementById('email').value;
+            document.getElementById('outputMobile').innerText = document.getElementById('mobile').value;
+            document.getElementById('outputObjective').innerText = document.getElementById('objective').value;
+            document.getElementById('outputSkills').innerText = document.getElementById('skills').value;
+            document.getElementById('outputTools').innerText = document.getElementById('tools').value;
+            document.getElementById('outputProjects').innerText = document.getElementById('projects').value;
+            document.getElementById('outputEducation').innerText = document.getElementById('education').value;
+
+            const imageFile = document.getElementById('image').files[0];
+            if (imageFile) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('outputImage').src = e.target.result;
+                };
+                reader.readAsDataURL(imageFile);
+            }
+        }
+    </script>
+</body>
+</html>
