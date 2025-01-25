@@ -60,14 +60,15 @@
         {% if form_instance.image %}
         <img src="{{ form_instance.image.url }}" alt="Profile Image">
         {% endif %}
-        <p><strong>Name:</strong> {{ form_instance.name }}</p>
-        <p><strong>Email:</strong> {{ form_instance.email }}</p>
+        <p><strong>Name:</strong> {{ form_instance.customuser.name }}</p>
+        <p><strong>Email:</strong> {{ form_instance.customuser.email }}</p>
         <p><strong>Mobile:</strong> {{ form_instance.mobile }}</p>
         <p><strong>Objective:</strong> {{ form_instance.objective }}</p>
         <p><strong>Skills:</strong> {{ form_instance.skills }}</p>
         <p><strong>Tools:</strong> {{ form_instance.tools }}</p>
         <p><strong>Projects:</strong> {{ form_instance.projects }}</p>
         <p><strong>Education:</strong> {{ form_instance.education }}</p>
+
 
         <button onclick="downloadPDF()">Download PDF</button>
         <button><a href="{% url 'logout' %}" style="text-decoration: none; color: white;">Logout</a></button>

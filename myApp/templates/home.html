@@ -100,7 +100,7 @@
         <div class="cv-list">
             {% for task in tasks %}
             <div class="cv-item">
-                {{ task.pk }}.{{ task.customuser.name }}
+                 {{ task.pk }}. {{ task.customuser.name }}
                 <button type="submit" class="btn">
                     <a href="{% url 'cv_details' task.pk %}">Details</a>
                 </button>

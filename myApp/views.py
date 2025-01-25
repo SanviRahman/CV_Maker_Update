@@ -46,10 +46,7 @@ def logins(request):
     return render(request, 'logins.html')
 
 
-
-
 #I want to write here cv details
-
 def cv_details(request,pk):
     try:
         tasks = FormMaker.objects.get(pk=pk)
@@ -58,10 +55,7 @@ def cv_details(request,pk):
         return HttpResponse("No such CV exists")
 
 
-
-
 #CRUD STARTS HERE
-
 @login_required
 def cvmaker(request):
     if request.method == "POST":
@@ -73,26 +67,32 @@ def cvmaker(request):
             return redirect('approved', pk=form_instance.pk)  # Redirect to the approved page with the correct pk
     else:
         form = FormMakerForm()
-    return render(request, 'cvmaker.html', {'form': form})
-
-
-
+        return render(request, 'cvmaker.html', {'form': form})
 
 
 
 def cv_update(request, pk):
     task = get_object_or_404(FormMaker, pk=pk)
     
-   
     if request.method == 'POST':
         form = FormMakerForm(request.POST, instance=task)  
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        user = request.user
+        if name is not None and name != '':
+            user.name = name
+        if email is not None and email != '':
+            user.email = email
+            user.save()   # Save changes to the user model
+        
+        # print form values
+        form.instance.customuser = user
         if form.is_valid():
             form.save()  
             return redirect('home')  
     else:
         form = FormMakerForm(instance=task)
-    
-    return render(request, 'cv_update.html', {'form': form})
+        return render(request, 'cv_update.html', {'form': form})
 
 
 
@@ -109,7 +109,10 @@ def cv_delete(request, pk):
 
 
 #I want to write here approved
+@login_required
 def approved(request, pk):
+    if not request.user.is_authenticated:
+        return redirect('logins')
     try:
         form_instance = FormMaker.objects.get(pk=pk)
         return render(request, 'approved.html', {'form_instance': form_instance})

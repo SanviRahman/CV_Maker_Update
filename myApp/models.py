@@ -2,7 +2,6 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from .managers import CustomUserManager
-from django.contrib.auth.models import User
 
 
 
@@ -31,7 +30,7 @@ class FormMaker(models.Model):
     tools= models.TextField(max_length=1000, blank=True, null=True)
     projects= models.TextField(max_length=1000, blank=True, null=True)
     education= models.TextField(max_length=1000, blank=True, null=True)
-    customuser= models.ForeignKey(CustomUser, on_delete=models.CASCADE, blank=True, null=True)
+    customuser= models.ForeignKey(CustomUser, on_delete=models.CASCADE, blank=True, null=True,related_name='formmaker')
     
 
  
